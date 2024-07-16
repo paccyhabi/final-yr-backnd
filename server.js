@@ -14,9 +14,16 @@ app.use(express.urlencoded({extended:true}))
 //routers
 const userRoutes = require('./routes/usersRoutes.js')
 const transactionRoutes = require('./routes/transactionRoutes.js')
+const netBalanceRoutes = require('./routes/netBalanceRoutes.js')
+const expenseRoutes = require('./routes/expenseRoutes.js')
+const incomeRoutes = require('./routes/incomeRoutes.js')
+const savingRoutes = require('./routes/savingRoutes.js')
 app.use('/', transactionRoutes)
 app.use('/', userRoutes)
-
+app.use('/',netBalanceRoutes)
+app.use('/',expenseRoutes)
+app.use('/',incomeRoutes)
+app.use('/',savingRoutes)
 
 //testing api
 app.get('/', (req, res) => {

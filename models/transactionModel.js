@@ -10,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     type: {
-      type: DataTypes.ENUM('income', 'expense'),
+      type: DataTypes.ENUM('income', 'expense','saving'),
       allowNull: false
     },
     category: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     }
   });
 
