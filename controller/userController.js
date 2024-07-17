@@ -10,14 +10,15 @@ const Transaction = db.transactions;
 // 1. create user
 const addUser = async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { username, email, password,phoneNumber } = req.body;
         // Hash the password before saving it to the database
         const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
 
         const user = await User.create({
             username,
             email,
-            password: hashedPassword, // Store the hashed password in the database
+            password: hashedPassword,
+            phoneNumber // Store the hashed password in the database
         });
 
         res.status(200).send(user);

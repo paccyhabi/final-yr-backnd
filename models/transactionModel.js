@@ -10,13 +10,22 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     type: {
-      type: DataTypes.ENUM('income', 'expense'),
+      type: DataTypes.ENUM('income', 'expense','savings'),
       allowNull: false
     },
     category: {
       type: DataTypes.STRING,
-      allowNull: false
-    }
+      allowNull: true
+    },
+    netBalance: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+      defaultValue: 0,
+    }, 
+    savings: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },         
   });
 
   return Transaction;
