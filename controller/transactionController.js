@@ -97,20 +97,6 @@ const createTransaction = async (req, res) => {
   }
 };
 
-// Retrieve transactions for a user
-const getTransactions = async (req, res) => {
-    let userId = req.params.id;
-    try {
-      if (!userId) {
-        return res.status(400).json({ message: 'User ID is required' });
-      }
-      const transactions = await db.transactions.findAll({ where: { userId } });
-      res.status(200).json(transactions);
-    } catch (error) {
-      console.error('Error retrieving transactions:', error);
-      res.status(500).json({ message: 'Error retrieving transactions', error: error.message || error });
-    }
-  };
 
   // Retrieve transactions for a user
 const getUserTransactions = async (req, res) => {
@@ -130,8 +116,8 @@ const getUserTransactions = async (req, res) => {
 // Delete a transaction
 const deleteTransaction = async (req, res) => {
     try {
-        let id = req.params.id;      
-        const deletedCount = await db.transactions.destroy({ where: { id} });
+        let userId = req.params.id;      
+        const deletedCount = await db.transactions.destroy({ where: { userId} });
         if (deletedCount > 0) {
             res.status(200).send('Transaction is deleted');
         } else {
@@ -146,7 +132,6 @@ const deleteTransaction = async (req, res) => {
 
 module.exports = {
     createTransaction,
-    getTransactions,
     deleteTransaction,
     getUserTransactions
 };

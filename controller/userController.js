@@ -109,6 +109,7 @@ const updateUser = async (req, res) => {
         // Update other user data based on req.body (e.g., username, email)
         user.username = req.body.username || user.username;
         user.email = req.body.email || user.email;
+        user.phoneNumber = req.body.phoneNumber || user.phoneNumber;
 
         // Save the updated user
         await user.save();
