@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 // create main model
 const User = db.users;
-const Transaction = db.transactions;
+
 
 // main work
 // 1. create user
@@ -135,26 +135,6 @@ const deleteUser = async (req, res) => {
         res.status(500).send('Error deleting user');
     }
 };
-
-const getUserTransactions = async (req, res) => {
-    try {
-        const userId = req.params.user_id; // Assuming userId is passed as a URL parameter
-        const data = await Transaction.findAll({
-            where: { user_id: userId },
-            include: [{
-                model: User,
-                as: 'user'
-            }]
-        });
-        res.json(data);
-    } catch (error) {
-        console.error('Error fetching transactions:', error);
-        res.status(500).json({ error: 'An error occurred while fetching transactions' });
-    }
-};
-
-
-
 
 
 module.exports = {

@@ -48,7 +48,6 @@ db.netBalances.belongsTo(db.users, {
 });
 
 
-<<<<<<< HEAD
 db.users.hasOne(db.savings, {
     foreignKey: 'userId',
     as: 'savings'
@@ -56,15 +55,6 @@ db.users.hasOne(db.savings, {
 db.savings.belongsTo(db.users, {
     foreignKey: 'userId',
     as: 'user'
-=======
-db.transactions.hasMany(db.savings, {
-    foreignKey: 'transactionId',
-    as: 'savings'
-});
-db.savings.belongsTo(db.transactions, {
-    foreignKey: 'transactionId',
-    as: 'transaction'
->>>>>>> f14f2674a20952b30ba9c56d4bce40897727f0dc
 });
 
 // Sync Models
