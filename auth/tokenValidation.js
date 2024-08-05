@@ -1,25 +1,23 @@
-const {verify} = require('jsonwebtoken');
-module.exports ={
-    checkToken: (req, res, next) => { 
-        let token = req.get('authorization');
-        console.log(token)
-        if(token){
-            token = token.slice(7);
-            verify(token, "qwe1234", (err, decoded) => {
+const { verify } = require('jsonwebtoken');
+const jwtSecret = process.env.JWT_SECRET || 'qwe1234';
+
+module.exports = {
+    checkToken: (req, res, next) => {
+        const token = req.headers['authorization']?.split(' ')[1];
+
+        if (token) {
+            verify(token, jwtSecret, (err, decoded) => {
                 if (err) {
                     console.error("Token verification error:", err);
-                    res.json({
-                        message: "Invalid token"
-                    });
+                    return res.status(401).json({ message: "Invalid token" });
                 } else {
+                    req.user = decoded; // Attach decoded token info (including userId) to request object
                     next();
                 }
-            })
-        }else{
-            console.log("token not found")
-            res.json({
-                message:"Access denied! unauthorized user"
-            })
+            });
+        } else {
+            console.log("Token not found");
+            res.status(401).json({ message: "Access denied! Unauthorized user" });
         }
     }
-}
+};

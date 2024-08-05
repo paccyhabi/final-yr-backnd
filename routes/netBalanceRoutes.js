@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const {checkToken} = require('../auth/tokenValidation.js')
 const netBalanceController = require('../controller/netBalanceController.js');
+const { authorizeUser } = require('../auth/authenticate.js');
 
-router.get('/balance/:id',netBalanceController.getNetBalance );
+router.get('/balance/:id',checkToken,authorizeUser, netBalanceController.getNetBalance );
 
 
 module.exports = router;

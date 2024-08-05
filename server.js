@@ -5,6 +5,8 @@ const app = express()
 const corsOptions = {
     origin: ['http://localhost:5173']
 };
+
+
 //midleware
 app.use(cookieParser());
 app.use(cors(corsOptions))

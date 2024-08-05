@@ -2,8 +2,12 @@ const db = require('../models');
 
 // Get all savings for a user
 const getSavings = async (req, res) => {
-  let userId = req.params.id;
   try {
+    const userId = req.user.userId;
+    const id = req.params.id;
+    if (String(userId) !== String(id)) {
+        return res.status(403).json({ message: 'Access denied. You cannot view this user.' });
+    }
     const savings = await db.savings.findAll({ where: { userId} });
     if (!savings.length) {
       return res.status(404).json({ message: 'No savings found' });
