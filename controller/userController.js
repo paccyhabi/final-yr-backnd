@@ -72,12 +72,12 @@ const addUser = async (req, res) => {
 // login user and generate JWT token
 const loginUser = async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { email, password } = req.body;
         // Find the user by their username
-        const user = await User.findOne({ where: { username } });
+        const user = await User.findOne({ where: { email } });
 
         if (!user) {
-            res.status(400).json({ message: 'User not found' });
+            res.status(400).json({ message: 'email not found' });
             return;
         }
 
