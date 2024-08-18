@@ -95,8 +95,10 @@ const loginUser = async (req, res) => {
                 .json({
                     userId: user.id,
                     username: user.username,
+                    email: user.email,
+                    phoneNumber: user.phoneNumber,
                     token: token,
-                    message: "Logged in successfully 😊 👌"
+                    message: "Logged in successfully"
                 });
 
         } else {
