@@ -176,7 +176,15 @@ const updateUser = async (req, res) => {
         // Save the updated user
         await user.save();
 
-        res.status(200).json({ message: 'User updated!' });
+        res.status(200).json({
+            message: 'User updated successfully',
+            user: {
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                phoneNumber: user.phoneNumber,
+            },
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error updating user' });
     }
